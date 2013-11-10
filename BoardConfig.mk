@@ -78,11 +78,6 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 419430400
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2013265920
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-# TWRP
-DEVICE_RESOLUTION := 480x800
-TW_NO_REBOOT_BOOTLOADER := true
-HAVE_SELINUX := true
-
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
@@ -117,7 +112,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun%d
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/infuse4g/shbootimg.mk
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/infuse4g/recovery/graphics.c
+#BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/infuse4g/recovery/graphics.c
 BOARD_USES_BML_OVER_MTD := true
 TARGET_RECOVERY_FSTAB := device/samsung/infuse4g/fstab.aries
 RECOVERY_FSTAB_VERSION := 2
@@ -157,20 +152,36 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 # skia
 BOARD_USE_SKIA_LCDTEXT := true
 
-# SELinux
-POLICYVERS := 24
+#TWRP Flags
+DEVICE_RESOLUTION := 480x800
+TW_NO_REBOOT_BOOTLOADER := true
+TW_INTERNAL_STORAGE_PATH := "/sdcard"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_FLASH_FROM_STORAGE := true
+TW_EXCLUDE_SUPERSU := true
+TW_NO_PARTITION_SD_CARD := true
+TW_NO_EXFAT_FUSE := true
+TW_INCLUDE_FB2PNG := true
 
+# SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/infuse4g/sepolicy
+    device/samsung/aries-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     bdaddr_read.te \
     device.te \
     file_contexts \
+    geomagneticd.te \
     mediaserver.te \
+    orientationd.te \
     property_contexts \
     pvrsrvinit.te \
-    rild.te
+    rild.te \
+    tvouthack.te \
+    tvoutserver.te
+
 
 # Hardware tunables
 BOARD_HARDWARE_CLASS := device/samsung/infuse4g/cmhw/

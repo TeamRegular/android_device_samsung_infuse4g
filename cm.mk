@@ -1,6 +1,3 @@
-# Infuse is a GSM phone
-$(call inherit-product, vendor/cm/config/gsm.mk)
-
 # Release name
 PRODUCT_RELEASE_NAME := Infuse4G
 
